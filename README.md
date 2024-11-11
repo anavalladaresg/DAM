@@ -20,7 +20,7 @@
 
     ![Contenido del docker-compose.yml](img/2.png)
 
-4. **Ejecutamos el .yml para que surtan efecto todas las configuraciones que hemos realizado en el documento, mediante el siguiente comando:**
+4. **Ejecutamos para que surtan efecto todas las configuraciones que hemos realizado en el documento, mediante el siguiente comando:**
 
     ```bash
     docker compose up -d
@@ -28,7 +28,7 @@
 
     ![Ejecucion del comando](img/3.png)
 
-    En mi caso, me ha dado un error diciendo que el puerto 8080 ya estaba en uso, por lo cual lo he cambiado al 8081, pero también estaba utilizado, así que he acabado modificando el puerto de adminer, al número 8083.
+    En mi caso, me ha dado un error diciendo que el puerto 8080 ya estaba en uso, por lo cual lo he cambiado al 8081, pero también estaba utilizado, por lo que he acabado modificando el puerto de adminer, al número 8083.
 
     ![Modificacion de puerto](img/4.png)
 
@@ -47,11 +47,11 @@
 7. **El último paso a realizar es iniciar sesión con las variables que hemos configurado en el archivo *docker-compose.yml*.**
 
     En nuestro caso, los valores serán los siguientes:
-        - Motor de base de datos: *MySQL*
-        - Servidor: *mariadb*
-        - Usuario: *sxe_user_db*
-        - Contraseña: *sxe_user_password_db*
-        - Base de datos: *sxe_owncloud_db*
+     - Motor de base de datos: *MySQL*
+     - Servidor: *mariadb*
+     - Usuario: *sxe_user_db*
+     - Contraseña: *sxe_user_password_db*
+     - Base de datos: *sxe_owncloud_db*
 
     ![Inicio de sesión](img/7.png)
 
@@ -61,7 +61,7 @@
 
 ---
 
-## Parte Terórica
+## Parte Teórica
 
 1. **Si ejecutas un contenedor con el siguiente comando: `docker run -it alpine`, ¿qué sucederá cuando salgas de la sesión interactiva del contenedor? ¿Por qué el contenedor se detiene automáticamente?**
 
