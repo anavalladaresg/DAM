@@ -1,18 +1,19 @@
 services:
+
   owncloud:
-    image: owncloud:latest #
+    image: owncloud/server:latest
     environment:
       - OWNCLOUD_ADMIN_USERNAME=sxe_admin
       - OWNCLOUD_ADMIN_PASSWORD=sxe_admin_password
-      - OWNCLOUD_DB_TYPE=mysql
       - OWNCLOUD_DB_NAME=sxe_owncloud_db
       - OWNCLOUD_DB_USERNAME=sxe_user_db
       - OWNCLOUD_DB_PASSWORD=sxe_user_password_db
-      - OWNCLOUD_DB_HOST=mariadb
     volumes:
-      - oc_vol:/var/www/html #volumen para persistir los datos
+      - oc_vol:/mnt/data #volumen para persistir los datos
     depends_on:
       - mariadb #indica la dependencia de mariadb
+    ports:
+      - 8080:8080
 
   mariadb:
     image: mariadb:11.1
@@ -29,7 +30,7 @@ services:
     environment:
       - ADMINER_DESIGN=dracula #selección de diseño
     ports:
-      - 8083:8080 #mapeo de puertos
+      - 8081:8080 #mapeo de puertos
 
 volumes:
   db_vol: #volumen para los datos de mariadb

@@ -59,6 +59,24 @@
 
     ![Pestaña final](img/9.png)
 
+Pasamos a configurar el Owncloud, para ello, debemos seguir los siguientes pasos:
+
+1. **Entramos en el puerto de Owncloud**
+   
+    En mi caso, he cambiado la red de la máquina a NAT, por lo que la IP será `localhost`, y el puerto 8082.
+
+    ![Entrada en Owncloud](img/10.png)
+
+    Entramos con el usuario y contraseña que hemos configurado en el archivo *docker-compose.yml*, en nuestro caso:
+     - Usuario: *sxe_admin*
+     - Contraseña: *sxe_admin_password*
+  
+    Una vez dentro, nos saldrá la siguiente pantalla, lo que significa que todo ha salido correctamente.
+
+    ![Inicio de sesión](img/11.png)
+
+
+
 ---
 
 ## Parte Teórica
