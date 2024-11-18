@@ -102,7 +102,7 @@ Jetpack Compose es una forma de crear interfaces en Android usando código más 
    - **¿Qué es `remember`?** Almacena el valor de una variable mientras el `Composable`* esté visible, evitando que se pierda cuando se vuelve a dibujar la pantalla.
   
       > [!NOTE]
-      > ***Composable**: Se le pone `@Composable` a los métodos que definen algo visual. (Ejemplo: `@Composable fun formulario() {...}`)
+      > ***Composable**: Se le pone `@Composable` a los métodos que definen algo visual. (Ejemplo:  > `@Composable fun formulario() {...}`)
 
    - **Ejemplo**:
      ```kotlin
