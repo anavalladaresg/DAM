@@ -2,7 +2,7 @@
 
 ##### 👤 Autor: Ana Valladares González
 
-### 1. **Ciclo de Vida de una Actividad en Android**
+### **Ciclo de Vida de una Actividad en Android**
    - **¿Qué es el ciclo de vida?** Una persona, a lo largo de su vida, pasa por diferentes momentos: nacimiento, crecimiento, descanso, muerte. Android maneja algo parecido para que la app no use recursos innecesarios.
    - **Estados Básicos**:
      - `onCreate()`: Aquí nace la actividad, donde se configuran las cosas iniciales como el diseño de la pantalla.
@@ -12,7 +12,7 @@
      - `onStop()`: Ya no está visible, pero aún existe en el fondo.
      - `onDestroy()`: La actividad se elimina por completo y se libera toda la memoria.
 
-### 2. **Logcat**
+### **Logcat**
    - **¿Qué es?** Si algo falla, Logcat te muestra el mensaje y dónde sucedió.
    - **Ejemplo**:
       ```kotlin
@@ -20,7 +20,7 @@
       Log.d(:::TAG, "La app está funcionando")
       ```
 
-### 3. **Jetpack Compose**
+### **Jetpack Compose**
 Jetpack Compose es una forma de crear interfaces gráficas en Android.
 
 #### **Componentes Básicos en Jetpack Compose**
@@ -92,22 +92,22 @@ Jetpack Compose es una forma de crear interfaces gráficas en Android.
 
 
 #### **Gestionando el Estado en Jetpack Compose**
- **Remember**
 
+##### **Remember**
 **¿Qué es `remember`?** Almacena el valor de una variable mientras el `Composable`* esté visible, evitando que se pierda cuando se vuelve a dibujar la pantalla.
   
 > [!NOTE]
 > ***Composable**: Se le pone `@Composable` a los métodos que definen algo visual. (Ejemplo:   `@Composable fun formulario() {...}`)
 
-   - **Ejemplo**:
-     ```kotlin
-     var contador by remember { mutableStateOf(0) } // Inicializa el contador en 0
-     Button(onClick = { contador++ }) { // Incrementa el contador cuando se hace click en el botón
-         Text("Contador: $contador")
-     }
-     ```
+- **Ejemplo**:
+    ```kotlin
+    var contador by remember { mutableStateOf(0) } // Inicializa el contador en 0
+    Button(onClick = { contador++ }) { // Incrementa el contador cuando se hace click en el botón
+        Text("Contador: $contador")
+    }
+    ```
 
-1. **State** y **MutableState**
+##### **State** y **MutableState**
    - **¿Qué es `State`?** Es una forma de decirle a `Compose` que algo cambió, y que debe actualizar la pantalla para reflejar ese cambio.
    - **¿Qué es `MutableState`?** Es un tipo de `State` que se puede cambiar. Es como una variable que `Compose` sabe que puede cambiar y debe actualizar la pantalla si lo hace.
    - **Diferencia entre `State` y `MutableState`**: `State` es inmutable (no se puede cambiar), mientras que `MutableState` es mutable.
@@ -127,7 +127,7 @@ Jetpack Compose es una forma de crear interfaces gráficas en Android.
      ```
 
 #### **Eventos en Jetpack Compose**
-1. **onClick** en botones
+**onClick** en botones
    - **Uso básico**: Definimos una función o acción que sucede cuando el usuario hace clic en el botón.
    - **Ejemplo**:
      ```kotlin
