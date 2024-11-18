@@ -17,7 +17,7 @@
    - **Ejemplo**:
       ```kotlin
       private val :::TAG = "MiApp"
-      Log.d(TAG, "La app está funcionando")
+      Log.d(:::TAG, "La app está funcionando")
       ```
 
 ### 3. **Jetpack Compose**
