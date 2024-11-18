@@ -93,7 +93,7 @@ Jetpack Compose es una forma de crear interfaces gráficas en Android.
 
 #### **Gestionando el Estado en Jetpack Compose**
  **Remember**
- 
+
 **¿Qué es `remember`?** Almacena el valor de una variable mientras el `Composable`* esté visible, evitando que se pierda cuando se vuelve a dibujar la pantalla.
   
 > [!NOTE]
@@ -227,10 +227,86 @@ Jetpack Compose es una forma de crear interfaces gráficas en Android.
         }
       ```
 
-5. **Interacción entre ViewModel, UI y Datos**:
+#### **Patrón Observer**
+- **¿Qué es?** Es un patrón de diseño que se usa para notificar a los objetos interesados cuando un objeto cambia de estado.
+- **Ejemplo**:
+  ```kotlin // 
+    // Interfaz Observador (el que recibe la notificación)
+    interface Observador {
+        fun actualizar(mensaje: String)
+    }
+
+    // Clase Sujeto (el que cambia de estado y notifica a los observadores)
+    class Sujeto {
+        private val observadores = mutableListOf<Observador>() // Lista de observadores
+        
+        fun agregarObservador(observador: Observador) { // Método para agregar observadores a la lista
+            observadores.add(observador)
+        }
+
+        fun cambiarEstado() { // Método que cambia el estado del sujeto
+            notificarObservadores("¡Estado cambiado!") // Notifica a los observadores que el estado ha cambiado
+        }
+
+        private fun notificarObservadores(mensaje: String) { // Método para notificar a los observadores
+            for (observador in observadores) {
+                observador.actualizar(mensaje) // Llama al método actualizar de cada observador
+            }
+        }
+    }
+
+    // Observador 1
+    class ObservadorConcreto1 : Observador {
+        override fun actualizar(mensaje: String) {
+            println("Observador 1 recibió el mensaje: $mensaje")
+        }
+    }
+
+    // Observador 2
+    class ObservadorConcreto2 : Observador {
+        override fun actualizar(mensaje: String) { // Método que se llama cuando el sujeto notifica a los observadores
+            println("Observador 2 recibió el mensaje: $mensaje") // Imprime el mensaje recibido por el observador
+        }
+    }
+
+    fun main() {
+        val sujeto = Sujeto()
+        val observador1 = ObservadorConcreto1()
+        val observador2 = ObservadorConcreto2()
+
+        // El sujeto agrega los observadores
+        sujeto.agregarObservador(observador1)
+        sujeto.agregarObservador(observador2)
+
+        // El sujeto cambia su estado y notifica a los observadores
+        sujeto.cambiarEstado()
+    }
+
+  ```
+
+   **Diagrama de secuencia entre ViewModel, UI y Datos**:
     ```mermaid
-    graph RL
-        Datos --> ViewModel
-        ViewModel --> UI
-        UI --> ViewModel
+    sequenceDiagram
+        participant User
+        participant UI
+        participant ViewModel
+        participant Datos
+
+        User ->> UI: Interactuar con la app
+        UI ->> ViewModel: Solicitar datos
+        ViewModel ->> Datos: Obtener datos
+        Datos -->> ViewModel: Devolver datos
+        ViewModel -->> UI: Devolver datos
+    ```
+
+    ---
+
+   **Diagrama de estado entre ViewModel, UI y Datos**:
+    ```mermaid
+    stateDiagram
+        [*] --> UI
+        UI --> ViewModel: Solicitar datos
+        ViewModel --> Datos: Obtener datos
+        Datos --> ViewModel: Devolver datos
+        ViewModel --> UI: Devolver datos
     ```
