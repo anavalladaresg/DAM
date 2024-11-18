@@ -3,7 +3,7 @@
 ##### 👤 Autor: Ana Valladares González
 
 ### 1. **Ciclo de Vida de una Actividad en Android**
-   - **¿Qué es el ciclo de vida?** Imagina que la actividad de tu app es como una persona. A lo largo del día (o de su vida), pasa por diferentes momentos: nacimiento, crecimiento, descanso, muerte. Android maneja algo parecido para que la app no use recursos innecesarios.
+   - **¿Qué es el ciclo de vida?** Una persona, a lo largo de su vida, pasa por diferentes momentos: nacimiento, crecimiento, descanso, muerte. Android maneja algo parecido para que la app no use recursos innecesarios.
    - **Estados Básicos**:
      - `onCreate()`: Aquí nace la actividad, donde se configuran las cosas iniciales como el diseño de la pantalla.
      - `onStart()`: La actividad ya está visible; imagina que ya “despertó”.
@@ -11,24 +11,17 @@
      - `onPause()`: El usuario se va a otra pantalla, pero la actividad aún existe.
      - `onStop()`: Ya no está visible, pero aún existe en el fondo.
      - `onDestroy()`: La actividad se elimina por completo y se libera toda la memoria.
-   - **Por qué importa**: Nos ayuda a saber cuándo guardar datos importantes, por ejemplo, si el usuario cierra la app o gira el teléfono.
 
 ### 2. **Logcat**
-   - **¿Qué es?** Es como una hoja de notas que te muestra qué está pasando en tu app mientras la ejecutas. Si algo falla, Logcat te muestra el error y dónde sucedió.
-   - **Niveles de Log (Mensajes)**:
-     - `Log.d("Etiqueta", "Mensaje")`: Mensajes de depuración.
-     - `Log.e("Etiqueta", "Mensaje")`: Errores.
-     - `Log.i("Etiqueta", "Mensaje")`: Información.
-   - **Por qué es útil**: Te permite ver qué hace tu app en cada momento y detectar problemas cuando algo no funciona.
+   - **¿Qué es?** Si algo falla, Logcat te muestra el mensaje y dónde sucedió.
+   - **Ejemplo**:
+      ```kotlin
+      private val :::TAG = "MiApp"
+      Log.d(TAG, "La app está funcionando")
+      ```
 
 ### 3. **Jetpack Compose**
-
-Jetpack Compose es una forma de crear interfaces en Android usando código más sencillo y directo. Es un sistema basado en componentes que permite crear y organizar elementos de la interfaz de manera declarativa, sin usar XML.
-
-**¿Por qué usar Jetpack Compose?**
-- **Simplifica el código**: No necesitas archivos XML. Todo el diseño está en un solo lugar.
-- **Es reactivo**: La interfaz de usuario responde automáticamente a los cambios en los datos.
-- **Modular y flexible**: Puedes combinar componentes (`Composables`) de varias maneras para lograr el diseño que quieres.
+Jetpack Compose es una forma de crear interfaces gráficas en Android.
 
 #### **Componentes Básicos en Jetpack Compose**
 1. **Texto (`Text`)**
@@ -58,7 +51,7 @@ Jetpack Compose es una forma de crear interfaces en Android usando código más 
      - `onClick`: Define qué pasa cuando el usuario pulsa el botón.
 
 3. **Modificadores (`Modifier`)**
-   - **¿Qué son?** Los modificadores se usan para cambiar la apariencia o el comportamiento de los componentes. Por ejemplo, puedes ajustar el tamaño, el color, o agregar márgenes.
+   - **¿Qué son?** Se usan para cambiar la apariencia o el comportamiento de los componentes.
    - **Ejemplo**:
      ```kotlin
      Text(
@@ -97,12 +90,14 @@ Jetpack Compose es una forma de crear interfaces en Android usando código más 
      }
      ```
 
+5. 
+
 #### **Gestionando el Estado en Jetpack Compose**
 1. **remember**
    - **¿Qué es `remember`?** Almacena el valor de una variable mientras el `Composable`* esté visible, evitando que se pierda cuando se vuelve a dibujar la pantalla.
   
       > [!NOTE]
-      > ***Composable**: Se le pone `@Composable` a los métodos que definen algo visual. (Ejemplo:  > `@Composable fun formulario() {...}`)
+      > ***Composable**: Se le pone `@Composable` a los métodos que definen algo visual. (Ejemplo:   `@Composable fun formulario() {...}`)
 
    - **Ejemplo**:
      ```kotlin
@@ -121,7 +116,7 @@ Jetpack Compose es una forma de crear interfaces en Android usando código más 
      ```kotlin
      @Composable
      fun Contador() {
-         var contador by remember { mutableStateOf(0) }
+         var contador by remember { mutableStateOf(0) } // Inicializa el contador en 0 con mutableStateOf (puede cambiar) y remember (recuerda el valor)
          Column {
              Text("Contador actual: $contador")
              Button(onClick = { contador++ }) {
@@ -140,31 +135,25 @@ Jetpack Compose es una forma de crear interfaces en Android usando código más 
           Text("Pulsar aquí")
       }
       ```
-    - **Ejemplo con contador**:
-    - ```kotlin
-      var contador by remember { mutableStateOf(0) }
-      Button(onClick = { contador++ }) {
-          Text("Contador: $contador")
-      }
-      ```
-### **LaunchedEffect y Corutinas**
+
+#### **LaunchedEffect y Corutinas**
 - **¿Qué es `LaunchedEffect`?** Es un bloque de código que ejecuta una tarea cuando el `Composable` aparece en la pantalla. Sirve para operaciones asíncronas, como cargar datos de una API.
+- **¿Qué son las Corutinas?** Son una forma de ejecutar tareas de fondo sin bloquear la app (en el ViewModel). Puedes usarlas para cargar datos de internet, por ejemplo.
 - **Ejemplo**:
   ```kotlin
   @Composable
   fun PantallaConCarga() {
-      LaunchedEffect(Unit) {
+      LaunchedEffect(Unit) { // Se ejecuta el bloque de código cuando el Composable aparece en pantalla (Unit es un tipo que representa la ausencia de un valor significativo, similar al void en Java)
           // Aquí podríamos cargar datos de una API
-          delay(2000)
+          delay(2000) // Simula una carga de 2 segundos
           println("Datos cargados")
       }
       Text("Cargando...")
   }
   ```
-- **Corutinas en ViewModel**: En el ViewModel puedes lanzar corutinas para manejar tareas de fondo (como cargar datos de internet) sin bloquear la app.
 
-### **Arquitectura MVVM con Jetpack Compose**
-1. **Model (Datos)**: Donde se definen los datos que utiliza la app, como objetos y listas.
+#### **Arquitectura MVVM con Jetpack Compose**
+1. **Datos**: Se definen los datos que utiliza la app, como objetos y listas.
    - Ejemplo:
      ```kotlin
      data class Tarea(val nombre: String, val completado: Boolean)
@@ -200,36 +189,48 @@ Jetpack Compose es una forma de crear interfaces en Android usando código más 
      }
      ```
 
-4. **Interacción entre ViewModel y UI**:
-   - **Observabilidad**: La UI observa los cambios en el ViewModel y se actualiza automáticamente.
-   - **LaunchedEffect con ViewModel**: Puedes usar `LaunchedEffect` para iniciar la carga de datos en el ViewModel.
 
----
+4. **Datos**: Un `enum` es un tipo de dato que permite crear un conjunto de valores fijos y relacionados. `Object` se usa para crear una única instancia de una clase, lo que se conoce como un `singleton`, y garantiza que solo haya un objeto de esa clase en toda la aplicación. `Data class` es una clase que solo contiene datos y no tiene lógica, y se usa para almacenar datos de forma estructurada.
+   
+   - Ejemplo de `enum`:
+     ```kotlin
+      enum class DiaDeLaSemana {
+          LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, DOMINGO
+      }
+     ```
 
-## Repaso
+   - Ejemplo de `object` (singleton):
+     ```kotlin
+      object BaseDeDatos {
+          val nombre = "MiBaseDeDatos"
+          
+          fun conectar() {
+              println("Conectado a $nombre")
+          }
+      }
 
-### 4. **remember y State en Jetpack Compose**
-   - **¿Qué es `remember`?** Imagina que tienes una variable que quieres que conserve su valor mientras usas la app. `remember` es como una memoria a corto plazo que te ayuda a guardar valores mientras la pantalla no se actualice o cambie.
-   - **Estado (`State`)**: Es una forma de decirle a `Compose` que algo cambió, y que debe actualizar la pantalla para reflejar ese cambio. Por ejemplo, si pulsas un botón y quieres que cambie el texto, usarías un `State` para actualizarlo automáticamente.
+      fun main() {
+          // Usando el singleton
+          BaseDeDatos.conectar()  // Imprime: Conectado a MiBaseDeDatos
+      }
+     ```
 
-### 5. **onClick (Eventos de Click)**
-   - **¿Qué es?** `onClick` es lo que sucede cuando tocas un botón o un elemento. Es una función que especifica qué debe hacer la app cuando ocurre un clic.
-   - **Ejemplo**: `Button(onClick = { texto = "Hola!" }) { Text("Presiona aquí") }` cambia el texto en pantalla cuando haces clic en el botón.
+     En este ejemplo, BaseDeDatos es un singleton, lo que significa que solo hay una instancia de esa clase, y puedes acceder a sus propiedades y métodos directamente sin necesidad de crear un objeto.
 
-### 6. **Arquitectura MVVM (Model-View-ViewModel)**
-   - **¿Qué significa MVVM?** Es una forma de organizar el código para que esté dividido en partes, lo que hace que sea más fácil de leer y mantener.
-     - **Model (Datos)**: Donde se guardan los datos que maneja tu app, como listas, objetos y constantes.
-     - **ViewModel (Lógica)**: Es el "jefe" que toma los datos y decide qué mostrar en la pantalla y cómo.
-     - **View (UI)**: Es lo que ves en la pantalla, como botones, texto, y otras cosas de `Compose`.
-   - **Cómo se comunican**:
-     - La pantalla (UI) observa los cambios en el ViewModel y se actualiza sola cuando hay un cambio.
+    - Ejemplo de `data class`:
+      ```kotlin
+        data class Persona(val nombre: String, val edad: Int)
+  
+        fun main() {
+            val persona = Persona("Ana", 25)
+            println(persona)  // Imprime: Persona(nombre=Ana, edad=25)
+        }
+      ```
 
-### 7. **Corutinas y Efectos en Jetpack Compose**
-   - **¿Qué es una corutina?** Es una forma de ejecutar tareas de fondo sin bloquear la app. Imagina que tu app necesita esperar a que se cargue una imagen; con corutinas, puedes hacer eso en segundo plano sin que la app se congele.
-   - **LaunchedEffect**: Te permite ejecutar una corutina dentro de un `Composable`. Es útil cuando quieres hacer algo una vez, como cargar datos cuando la pantalla aparece.
-   - **Ejemplo de uso**: `LaunchedEffect(Unit) { cargarDatos() }` ejecutará `cargarDatos()` una vez cuando el `Composable` aparezca en pantalla.
-
-### 8. **Ejemplo Práctico de MVVM con Jetpack Compose**
-   - **Modelo (Datos)**: Crea un modelo, por ejemplo, una clase `Tarea(val nombre: String, val completado: Boolean)`.
-   - **ViewModel (Lógica)**: Añade una lista de tareas en el ViewModel y funciones para añadir o marcar tareas como completas.
-   - **UI (Interfaz)**: Crea un diseño que muestre la lista de tareas y botones para interactuar con ellas. La pantalla observa el ViewModel y se actualiza sola.
+5. **Interacción entre ViewModel, UI y Datos**:
+    ```mermaid
+    graph RL
+        Datos --> ViewModel
+        ViewModel --> UI
+        UI --> ViewModel
+    ```
