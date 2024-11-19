@@ -228,7 +228,7 @@ Jetpack Compose es una forma de crear interfaces gráficas en Android.
       ```
 
 #### **Patrón Observer**
-- **¿Qué es?** Es un patrón de diseño que se usa para notificar a los objetos interesados cuando un objeto cambia de estado.
+- **¿Qué es?** Es un patrón de diseño que se usa para notificar a los objetos interesados cuando un objeto cambia de estado. *(Irá en el ViewModel)*
 - **Ejemplo**:
   ```kotlin // 
     // Interfaz Observador (el que recibe la notificación)
@@ -281,8 +281,24 @@ Jetpack Compose es una forma de crear interfaces gráficas en Android.
         // El sujeto cambia su estado y notifica a los observadores
         sujeto.cambiarEstado()
     }
-
   ```
+
+#### **Corrutinas**
+- **¿Qué son?** Son una forma de ejecutar tareas de fondo sin bloquear la app. Puedes usarlas para cargar datos de internet, por ejemplo.
+- **Ejemplo**:
+
+    ```kotlin
+    fun main() {
+        println("Inicio de la tarea principal")
+        GlobalScope.launch { // Lanza una nueva corrutina
+            delay(1000) // Simula una tarea que tarda 1 segundo
+            println("Tarea de la corrutina completada")
+        }
+        println("Fin de la tarea principal")
+        Thread.sleep(2000) // Espera 2 segundos para que la corrutina termine
+    }
+    ```
+
 
    **Diagrama de secuencia entre ViewModel, UI y Datos**:
     ```mermaid
@@ -310,3 +326,60 @@ Jetpack Compose es una forma de crear interfaces gráficas en Android.
         Datos --> ViewModel: Devolver datos
         ViewModel --> UI: Devolver datos
     ```
+
+---
+
+### **Ejemplito de Kotlin**
+```kotlin
+// Datos que simulan la base de datos de productos
+class Datos {
+    private val productos = listOf("Producto A", "Producto B", "Producto C")
+
+    // Devuelve los productos disponibles
+    fun obtenerProductos(): List<String> {
+        return productos // En este caso no hay validaciones condicionales
+    }
+}
+
+// ViewModel que gestiona la lógica de la búsqueda de productos
+class VM(private val datos: Datos) {
+    fun obtenerProductos(): List<String> {
+        return datos.obtenerProductos() // No hay lógica condicional aquí, simplemente devuelve la lista
+    }
+}
+
+// Interfaz de usuario (UI) que interactúa con el ViewModel
+class UI(private val vm: VM) {
+    fun onBuscarProductos() {
+        // Consulta la lista de productos al ViewModel
+        val productos = vm.obtenerProductos()
+
+        // Muestra los productos encontrados
+        if (productos.isEmpty()) {
+            mostrarMensaje("No se encontraron productos.")
+        } else {
+            mostrarProductos(productos)
+        }
+    }
+
+    fun mostrarMensaje(mensaje: String) {
+        // Muestra un mensaje al usuario
+        println(mensaje)
+    }
+
+    fun mostrarProductos(productos: List<String>) {
+        // Muestra la lista de productos al usuario
+        println("Productos disponibles:")
+        productos.forEach { println(it) }
+    }
+}
+
+fun main() {
+    val datos = Datos()
+    val vm = VM(datos)
+    val ui = UI(vm)
+
+    // Simula la búsqueda de productos
+    ui.onBuscarProductos() // Muestra la lista de productos
+}
+```
