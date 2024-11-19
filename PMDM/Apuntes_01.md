@@ -283,23 +283,6 @@ Jetpack Compose es una forma de crear interfaces gráficas en Android.
     }
   ```
 
-#### **Corrutinas**
-- **¿Qué son?** Son una forma de ejecutar tareas de fondo sin bloquear la app. Puedes usarlas para cargar datos de internet, por ejemplo.
-- **Ejemplo**:
-
-    ```kotlin
-    fun main() {
-        println("Inicio de la tarea principal")
-        GlobalScope.launch { // Lanza una nueva corrutina
-            delay(1000) // Simula una tarea que tarda 1 segundo
-            println("Tarea de la corrutina completada")
-        }
-        println("Fin de la tarea principal")
-        Thread.sleep(2000) // Espera 2 segundos para que la corrutina termine
-    }
-    ```
-
-
    **Diagrama de secuencia entre ViewModel, UI y Datos**:
     ```mermaid
     sequenceDiagram
