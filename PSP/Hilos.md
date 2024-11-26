@@ -169,3 +169,15 @@ List<Process> pipes = ProcessBuilder.startPipeline(procesos); // Inicia los proc
 Process last = pipes.get(pipes.size() - 1);	// Último proceso
 System.out.println("Resultado: " + last.getInputStream().read()); // Muestra el resultado del último proceso
 ```
+
+### **Redirección de Entrada/Salida**
+
+Se puede redirigir la entrada y salida de un proceso mediante los métodos `redirectInput()` y `redirectOutput()` de la clase `ProcessBuilder`.
+
+```java
+ProcessBuilder pb = new ProcessBuilder("ls", "-l");
+pb.redirectErrorStream(true); // Redirige la salida de error al mismo stream que la salida 
+File txt = folder.newFile("output.txt");
+pb.redirectOutput(txt); // Redirige la salida al archivo output.txt
+Process p = pb.start();
+```
