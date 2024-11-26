@@ -40,7 +40,7 @@ Process p = pBloc.start();
 - `redirectInput()`: Redirige la entrada del proceso.
 - `redirectOutput()`: Redirige la salida del proceso.
 - `inheritIO()`: Hereda la entrada, salida y error del proceso.
-- 
+
 ### **java.lang.Process**
 
 Se encarga de manejar los procesos. Se puede obtener una instancia de esta clase mediante el método `exec()`, y se puede obtener la salida del proceso mediante el método `getInputStream()`. 
@@ -84,6 +84,7 @@ hilo.start();
     System.out.println("Hilo terminado");
     ```
 - `void join()`: Espera a que el hilo termine.
+
     ```java
     Thread hilo = new Thread();
     hilo.start(); // Inicia el hilo
@@ -114,3 +115,57 @@ hilo.start();
 ### Diferencia entre `Thread` y `Runnable`
 
 La diferencia principal es que `Thread` es una **clase** que extiende de `Object`, mientras que `Runnable` es una **interfaz** que se puede implementar en una clase.
+
+### **Método join() [Clase Thread]**
+
+El método `join()` de la clase `Thread` hace que el hilo actual espere a que termine el hilo en el que se ha llamado, antes de continuar con el programa.
+
+```java
+Thread hilo = new Thread();
+hilo.start(); // Inicia el hilo
+hilo.join(); // Espera a que el hilo termine antes de continuar con el programa
+System.out.println("Hilo terminado");
+```
+
+### **Método sleep() [Clase Thread]**
+
+El método `sleep()` de la clase `Thread` hace que el hilo actual duerma durante un tiempo determinado.
+
+```java
+Thread hilo = new Thread();
+hilo.start(); // Inicia el hilo
+hilo.sleep(1000); // Hace que el hilo duerma durante 1 segundo
+System.out.println("Hilo terminado");
+```
+
+### **Método getInputStream() [Clase Process]**
+
+El método `getInputStream()` de la clase `Process` devuelve la información o errores que se han producido durante la ejecución del proceso.
+
+> [!IMPORTANT]
+> Debemos simplificar el proceso con BufferedReader e InputStreamReader para poder leer la salida del proceso, además de métodos como `readLine()` para leer línea a línea.
+
+```java
+Process p = pbuilder.start();
+BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+String linea;
+while ((linea = br.readLine()) != null) {
+    System.out.println(linea);
+}
+br.close();
+```
+
+### **Pipelines**
+
+Un pipeline es una serie de procesos conectados entre sí, de manera que la salida de un proceso es la entrada del siguiente. Se pueden crear pipelines mediante la clase `ProcessBuilder`.
+
+```java
+List<ProcessBuilder> procesos = Arrays.asList(
+    new ProcessBuilder("ls", "-l"),
+    new ProcessBuilder("grep", "java"),
+    new ProcessBuilder("wc", "-l")
+); // Lista de procesos
+List<Process> pipes = ProcessBuilder.startPipeline(procesos); // Inicia los procesos 
+Process last = pipes.get(pipes.size() - 1);	// Último proceso
+System.out.println("Resultado: " + last.getInputStream().read()); // Muestra el resultado del último proceso
+```
