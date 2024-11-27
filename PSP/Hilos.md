@@ -63,14 +63,14 @@ Ejemplo de salida:
 ```java
 ProcessBuilder pb = new ProcessBuilder("ls", "-l");
 pb.redirectOutput(new File("salida.txt")); // Guarda la salida en un archivo
-Process p = pb.start();
+pb.start();
 ```
 
 Ejemplo de entrada:
 ```java
 ProcessBuilder pb = new ProcessBuilder("wc", "-l");
 pb.redirectInput(new File("entrada.txt")); // Lee la entrada desde un archivo
-Process p = pb.start();
+pb.start();
 ```
 
 ### **Clase `java.lang.Process`**  
