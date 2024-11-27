@@ -75,6 +75,9 @@ pb.start();
 
 Ejercicio 4:
 
+>[!IMPORTANT]
+> En Linux, en vez de `cmd.exe /c`, se utiliza `bash -c`.
+
 ![Ejercicio 4](./img/pb1.png)
 
 ### **Clase `java.lang.Process`**  
