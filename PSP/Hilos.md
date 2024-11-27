@@ -2,9 +2,23 @@
 
 ##### 👤 Autor: Ana Valladares González
 
-### **java.lang.Runtime**
+---
 
-Se encarga de ejecutar los procesos de Java. Se puede obtener una instancia de esta clase mediante el método `getRuntime()`, y se puede ejecutar un proceso mediante el método `exec()`. 
+## **Introducción a los Procesos y Hilos**  
+
+### **¿Qué es un proceso?**  
+Un **proceso** es un programa en ejecución. Cada vez que ejecutas una aplicación en tu ordenador, se crea un proceso para manejarla.  
+
+### **¿Qué es un hilo?**  
+Un **hilo** es la unidad más pequeña de ejecución dentro de un proceso. Los hilos permiten realizar varias tareas al mismo tiempo dentro de un proceso.  
+
+---  
+
+## **Trabajar con Procesos en Java**  
+
+### **Clase `java.lang.Runtime`**  
+
+La clase Runtime te permite ejecutar programas o comandos externos desde un programa en Java.
 
 ```java
 try {
@@ -22,13 +36,15 @@ try {
 }
 ```
 
-### **java.lang.ProcessBuilder**
+### **Clase `java.lang.ProcessBuilder`**  
 
-Se encarga de manejar los atributos de los procesos. Se puede obtener una instancia de esta clase mediante el constructor `ProcessBuilder(String... command)`, y se puede ejecutar un proceso mediante el método `start()`. 
+La clase `ProcessBuilder` proporciona un control más avanzado sobre los procesos. Permite configurar el entorno, redirigir entradas y salidas, entre otros.  
+
+#### **Ejemplo básico:**  
 
 ```java
-ProcessBuilder pBloc = new ProcessBuilder("notepad.exe", "prueba.txt");
-Process p = pBloc.start();
+ProcessBuilder pb = new ProcessBuilder("notepad.exe", "archivo.txt");
+Process proceso = pb.start(); // Inicia el proceso
 ```
 
 #### **Métodos de la clase ProcessBuilder**
@@ -37,116 +53,34 @@ Process p = pBloc.start();
 - `command()`: Devuelve el comando que se utilizó para ejecutar el proceso.
 - `directory()`: Devuelve el directorio de trabajo del proceso.
 - `environment()`: Devuelve el entorno del proceso.
-- `redirectInput()`: Redirige la entrada del proceso.
-- `redirectOutput()`: Redirige la salida del proceso.
+- `redirectInput()`: Redirige la entrada del proceso (sirve para redirigir la entrada de un proceso a un archivo).
+- `redirectOutput()`: Redirige la salida del proceso (sirve para redirigir la salida de un proceso a un archivo).
 - `inheritIO()`: Hereda la entrada, salida y error del proceso.
 
-### **java.lang.Process**
+#### **Redirección de entrada y salida:**  
 
-Se encarga de manejar los procesos. Se puede obtener una instancia de esta clase mediante el método `exec()`, y se puede obtener la salida del proceso mediante el método `getInputStream()`. 
-
+Ejemplo de salida:
 ```java
-Process proceso = Runtime.getRuntime().exec("notepad.exe");
-InputStream entrada = proceso.getInputStream();
-int i;
-while ((i = entrada.read()) != -1) {
-    System.out.print((char) i);
-}
+ProcessBuilder pb = new ProcessBuilder("ls", "-l");
+pb.redirectOutput(new File("salida.txt")); // Guarda la salida en un archivo
+Process p = pb.start();
 ```
 
-#### **Métodos de la clase Process**
-
-- `int exitValue()`: Devuelve el valor de salida del proceso.
-- `boolean isAlive()`: Devuelve si el proceso está vivo.
-- `int waitFor()`: Espera a que el proceso termine.
-- `boolean waitFor(long timeout, TimeUnit unit)`: Espera a que el proceso termine durante un tiempo determinado.
-- `void Destroy()`: Destruye el proceso.
-- `Process destroyForcibly()`: Destruye el proceso de forma forzosa.
-
-### **java.lang.Thread**
-
-Se encarga de manejar los hilos de ejecución. Se puede obtener una instancia de esta clase mediante el constructor `Thread()`, y se puede ejecutar un hilo mediante el método `start()`. 
-
+Ejemplo de entrada:
 ```java
-Thread hilo = new Thread();
-hilo.start();
+ProcessBuilder pb = new ProcessBuilder("wc", "-l");
+pb.redirectInput(new File("entrada.txt")); // Lee la entrada desde un archivo
+Process p = pb.start();
 ```
 
-#### **Métodos de la clase Thread**
+### **Clase `java.lang.Process`**  
 
-- `void run()`: Método que se ejecuta cuando se inicia el hilo.
-- `void start()`: Inicia el hilo.
-- `void sleep(long milisegundos)`: Hace que el hilo duerma durante un tiempo determinado.
-    ```java
-    Thread hilo = new Thread();
-    hilo.start(); // Inicia el hilo
-    hilo.sleep(1000); // Hace que el hilo duerma durante 1 segundo
-    System.out.println("Hilo terminado");
-    ```
-- `void join()`: Espera a que el hilo termine.
+La clase `Process` representa un proceso en ejecución. Permite manejar su estado, capturar su salida o destruirlo.  
 
-    ```java
-    Thread hilo = new Thread();
-    hilo.start(); // Inicia el hilo
-    hilo.join(); // Espera a que el hilo termine antes de continuar con el programa
-    System.out.println("Hilo terminado");
-    ```
-- `void interrupt()`: Interrumpe el hilo.
-- `boolean isAlive()`: Devuelve si el hilo está vivo.
-- `static void yield()`: Hace que el hilo actual ceda el procesador.
-- `static Thread currentThread()`: Devuelve el hilo actual.
-- `static void dumpStack()`: Muestra la pila de llamadas del hilo actual.
-
-### **java.lang.Runnable**
-
-Se encarga de manejar los hilos de ejecución. Se puede obtener una instancia de esta clase mediante el método `run()`, y se puede ejecutar un hilo mediante el constructor `Thread(Runnable target)`. 
+#### **Ejemplo: Capturar la salida de un proceso:**  
 
 ```java
-Runnable r = new Runnable() {
-    @Override
-    public void run() {
-        System.out.println("Hilo ejecutado");
-    }
-};
-Thread hilo = new Thread(r);
-hilo.start();
-```
-
-### Diferencia entre `Thread` y `Runnable`
-
-La diferencia principal es que `Thread` es una **clase** que extiende de `Object`, mientras que `Runnable` es una **interfaz** que se puede implementar en una clase.
-
-### **Método join() [Clase Thread]**
-
-El método `join()` de la clase `Thread` hace que el hilo actual espere a que termine el hilo en el que se ha llamado, antes de continuar con el programa.
-
-```java
-Thread hilo = new Thread();
-hilo.start(); // Inicia el hilo
-hilo.join(); // Espera a que el hilo termine antes de continuar con el programa
-System.out.println("Hilo terminado");
-```
-
-### **Método sleep() [Clase Thread]**
-
-El método `sleep()` de la clase `Thread` hace que el hilo actual duerma durante un tiempo determinado.
-
-```java
-Thread hilo = new Thread();
-hilo.start(); // Inicia el hilo
-hilo.sleep(1000); // Hace que el hilo duerma durante 1 segundo
-System.out.println("Hilo terminado");
-```
-
-### **Método getInputStream() [Clase Process]**
-
-El método `getInputStream()` de la clase `Process` devuelve la información o errores que se han producido durante la ejecución del proceso.
-
-> [!IMPORTANT]
-> Debemos simplificar el proceso con BufferedReader e InputStreamReader para poder leer la salida del proceso, además de métodos como `readLine()` para leer línea a línea.
-
-```java
-Process p = pbuilder.start();
+Process p = Runtime.getRuntime().exec("ping google.com");
 BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
 String linea;
 while ((linea = br.readLine()) != null) {
@@ -155,29 +89,183 @@ while ((linea = br.readLine()) != null) {
 br.close();
 ```
 
-### **Pipelines**
+#### **Métodos de la clase Process**
 
-Un pipeline es una serie de procesos conectados entre sí, de manera que la salida de un proceso es la entrada del siguiente. Se pueden crear pipelines mediante la clase `ProcessBuilder`.
+- `InputStream getInputStream()`: Devuelve la entrada del proceso.
+- `int exitValue()`: Devuelve el valor de salida del proceso.
+- `boolean isAlive()`: Devuelve si el proceso está vivo.
+- `int waitFor()`: Espera a que el proceso termine.
+- `boolean waitFor(long timeout, TimeUnit unit)`: Espera a que el proceso termine durante un tiempo determinado.
+- `void Destroy()`: Destruye el proceso.
+- 
+---
+
+## **Trabajar con Hilos en Java**  
+
+### **Clase `java.lang.Thread`**  
+
+Un **hilo** se puede crear extendiendo la clase `Thread` y sobreescribiendo su método `run()`.  
+
+> [!NOTE]
+> Los hilos solo arrancan al ejecutar el método `start()` [que llama al método `run()`], no al crearlos.
+
+#### **Ejemplo básico:**  
+
+```java
+Thread hilo = new Thread(() -> System.out.println("Hilo ejecutado"));
+hilo.start(); // Inicia el hilo
+```
+
+#### **Métodos útiles:**  
+
+- **`start()`**: Inicia el hilo.  
+- **`sleep(long ms)`**: Pausa el hilo durante un tiempo en milisegundos.  
+- **`join()`**: Hace que el hilo actual espere a que otro hilo termine.  
+
+```java
+Thread hilo = new Thread(() -> System.out.println("Hilo ejecutado"));
+hilo.start();
+hilo.join(); // Espera a que el hilo termine
+System.out.println("Hilo finalizado");
+```
+
+---
+
+### **Interfaz `java.lang.Runnable`**  
+
+La interfaz `Runnable` es otra forma de crear hilos. Es útil si necesitas que tu clase extienda otra clase además de manejar hilos.  
+
+#### **Ejemplo:**  
+
+```java
+Runnable tarea = () -> System.out.println("Hilo ejecutado");
+Thread hilo = new Thread(tarea);
+hilo.start();
+```
+
+---
+
+### **Prioridades de Hilos**  
+
+Puedes asignar prioridades a los hilos con los métodos `setPriority()` y `getPriority()`.  
+
+```java
+Thread hilo = new Thread();
+hilo.setPriority(Thread.MAX_PRIORITY); // Prioridad máxima
+System.out.println("Prioridad: " + hilo.getPriority());
+```
+
+#### Posibilidades de prioridades
+
+- `Thread.MIN_PRIORITY`: Prioridad mínima.
+- `Thread.NORM_PRIORITY`: Prioridad normal.
+- `Thread.MAX_PRIORITY`: Prioridad máxima.
+- `Thread.currentThread().getPriority()`: Prioridad del hilo actual.
+- `Thread.currentThread().setPriority(int priority)`: Establece la prioridad del hilo actual (0-10, siendo 0 la prioridad mínima y 10 la máxima).
+
+---
+
+## **Conceptos Avanzados**  
+
+### **Variables de Acceso Compartido**  
+
+Cuando varios hilos necesitan acceder a la misma variable, pueden ocurrir errores si no se sincroniza correctamente.  
+
+#### **Uso de `synchronized`:**  
+
+```java
+public synchronized void incrementar() {
+    contador++;
+}
+```
+
+#### **Ejemplo Completo:**  
+
+```java
+public class Contador {
+    private int contador = 0;
+
+    public synchronized void incrementar() {
+        contador++;
+    }
+
+    public int getContador() {
+        return contador;
+    }
+}
+
+public class Hilo extends Thread {
+    private Contador contador;
+
+    public Hilo(Contador contador) {
+        this.contador = contador;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            contador.incrementar();
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Contador contador = new Contador();
+        Hilo hilo1 = new Hilo(contador);
+        Hilo hilo2 = new Hilo(contador);
+        Hilo hilo3 = new Hilo(contador);
+        Hilo hilo4 = new Hilo(contador);
+        hilo1.start();
+        hilo2.start();
+        hilo3.start();
+        hilo4.start();
+        try {
+            hilo1.join();
+            hilo2.join();
+            hilo3.join();
+            hilo4.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Contador: " + contador.getContador());
+    }
+}
+```
+
+---
+
+### **Pipelines**  
+
+Un **pipeline** conecta varios procesos en serie. La salida de un proceso sirve como entrada del siguiente.  
+
+#### **Ejemplo:**  
 
 ```java
 List<ProcessBuilder> procesos = Arrays.asList(
     new ProcessBuilder("ls", "-l"),
     new ProcessBuilder("grep", "java"),
     new ProcessBuilder("wc", "-l")
-); // Lista de procesos
-List<Process> pipes = ProcessBuilder.startPipeline(procesos); // Inicia los procesos 
-Process last = pipes.get(pipes.size() - 1);	// Último proceso
-System.out.println("Resultado: " + last.getInputStream().read()); // Muestra el resultado del último proceso
+);
+List<Process> pipes = ProcessBuilder.startPipeline(procesos);
 ```
 
-### **Redirección de Entrada/Salida**
+---
 
-Se puede redirigir la entrada y salida de un proceso mediante los métodos `redirectInput()` y `redirectOutput()` de la clase `ProcessBuilder`.
+### **Información de los Procesos**  
+
+La clase `ProcessHandle` permite obtener información de los procesos en ejecución.  
 
 ```java
-ProcessBuilder pb = new ProcessBuilder("ls", "-l");
-pb.redirectErrorStream(true); // Redirige la salida de error al mismo stream que la salida 
-File txt = folder.newFile("output.txt");
-pb.redirectOutput(txt); // Redirige la salida al archivo output.txt
-Process p = pb.start();
+ProcessHandle ph = ProcessHandle.current();
+ProcessHandle.Info info = ph.info();
+
+System.out.println("PID: " + ph.pid());
+System.out.println("Usuario: " + info.user().orElse("Desconocido"));
+System.out.println("Comando: " + info.command().orElse("Desconocido"));
 ```
