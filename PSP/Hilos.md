@@ -73,6 +73,10 @@ pb.redirectInput(new File("entrada.txt")); // Lee la entrada desde un archivo
 pb.start();
 ```
 
+Ejercicio 4:
+
+![Ejercicio 4](./img/pb1.png)
+
 ### **Clase `java.lang.Process`**  
 
 La clase `Process` representa un proceso en ejecución. Permite manejar su estado, capturar su salida o destruirlo.  
