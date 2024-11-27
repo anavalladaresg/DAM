@@ -276,3 +276,80 @@ System.out.println("PID: " + ph.pid());
 System.out.println("Usuario: " + info.user().orElse("Desconocido"));
 System.out.println("Comando: " + info.command().orElse("Desconocido"));
 ```
+
+Ejercicio 18 (Taylor Swift):
+
+```java
+public class Vialia {
+    private final int ALUMNOS = 200; // Número de alumnos
+    private int entradas = 50; // Número de entradas
+    private final int MAX_INTENTOS = 5; // Número máximo de intentos
+
+    /**
+     * Método que intenta entrar en el recinto.
+     * @return true si ha conseguido entrar, false si no.
+     */
+    public synchronized boolean intentarEntrar() {
+        if(entradas > 0) {
+            System.out.println(Thread.currentThread().getName() + " ha conseguido entrar y comprar una entrada.");
+            entradas--; // Se resta una entrada
+            return true;
+        } else {
+            System.out.println(Thread.currentThread().getName() + " ya no quedan entradas.");
+            return false;
+        }
+    }
+
+    public int getALUMNOS() {
+        return ALUMNOS;
+    }
+
+    public int getMAX_INTENTOS() {
+        return MAX_INTENTOS;
+    }
+}
+----------------------------------------------------------------------------
+public class Alumno implements Runnable {
+    private Vialia vialia;
+
+    public Alumno(Vialia vialia) {
+        this.vialia = vialia;
+    }
+
+    @Override
+    public void run() {
+        int intentos = 0;
+        while (intentos < vialia.getMAX_INTENTOS()) { // Mientras no se haya superado el número máximo de intentos
+            if(vialia.intentarEntrar()) { // Si se ha conseguido entrar
+                return; // Salir del método run
+            }
+            intentos++; // Incrementar el número de intentos si no se ha conseguido entrar
+            System.out.println(Thread.currentThread().getName() + " No se ha conseguido entrar. Intento " + intentos);
+        }
+        System.out.println(Thread.currentThread().getName() + " se ha hecho fan de Kanye West.");
+    }
+}
+----------------------------------------------------------------------------
+public class Main {
+    public static void main(String[] args) {
+        Vialia v = new Vialia();
+        Thread[] alumnos = new Thread[v.getALUMNOS()]; // Array de hilos
+
+        // Crear hilos por cada alumno y establecer su nombre
+        for(int i = 0; i < v.getALUMNOS(); i++) {
+            alumnos[i] = new Thread(new Alumno(v));
+            alumnos[i].setName("Alumno " + (i + 1));
+            alumnos[i].start();
+        }
+
+        // Esperar a que todos los hilos terminen
+        for(int i = 0; i < v.getALUMNOS(); i++) {
+            try {
+                alumnos[i].join();
+            } catch (InterruptedException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+}
+```
