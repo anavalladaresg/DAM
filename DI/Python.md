@@ -15,7 +15,6 @@
 7.  [Programación orientada a objetos](#id12)
 8.  [QT](#id13)
 9.  [Funcionalidades de botones](#id14)
-10. []
 
 ---
 
@@ -75,6 +74,65 @@ elif a == b:
   print("a y b son iguales")
 else:
   print("a es mayor que b")
+```
+
+#### 3.4. For
+
+Itera sobre una secuencia de elementos.
+
+```python
+frutas = ["manzana", "plátano", "cereza"]
+for x in frutas:
+  print(x)
+```
+
+#### 3.5. While
+
+Ejecuta un bloque de código mientras una condición sea verdadera.
+
+```python
+i = 1
+
+while i < 6:
+  print(i)
+  i += 1
+```
+
+#### 3.6. Break
+
+Detiene la ejecución del bucle aunque la condición sea verdadera.
+
+```python
+i = 1
+
+while i < 6:
+  print(i)
+  if i == 3:
+    break
+  i += 1
+```
+
+#### 3.7. Continue
+
+Detiene la iteración actual y continúa con la siguiente.
+
+```python
+i = 0
+
+while i < 6:
+  i += 1
+  if i == 3:
+    continue
+  print(i)
+```
+
+#### 3.8. Range
+
+Genera una secuencia de números.
+
+```python
+for x in range(6):
+  print(x)
 ```
 
 ---
@@ -342,6 +400,17 @@ class MyModel(QAbstractListModel):
   def data(self, index, role): # Devuelve los datos de la lista
     if role == Qt.DisplayRole: # Si el rol es DisplayRole
       return self._data[index.row()] # Devuelve el elemento de la lista en la posición index.row() [posición de la fila]
+```
+
+#### 8.19. QGroupBox
+
+Crea un grupo de elementos.
+
+```python
+login_frame = QGroupBox("Login") # Crea un grupo de elementos
+login_frame.setStyleSheet('font-size: 10px; font-weight: bold;') # Establece el estilo del grupo de elementos
+login_layout = QVBoxLayout() # Crea un diseño vertical
+login_frame.setLayout(login_layout) # Establece el diseño del grupo de elementos
 ```
 
 ---
