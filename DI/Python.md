@@ -83,6 +83,9 @@ else:
 
 Una función es un bloque de código que solo se ejecuta cuando se llama.
 
+> [!NOTE]
+Para que salga todo lo que queremos en la ventana, lo ultimo que debemos poner es `ventana.show()`, si no, estaría ejecutando la ventana antes de añadirle los elementos.
+
 ```python
 def funcion():
   print("Hello, World!")
