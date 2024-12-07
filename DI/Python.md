@@ -164,7 +164,9 @@ Crea una etiqueta con un texto.
 
 ```python
 etiqueta = QLabel('Hello World!', ventana) # Crea una etiqueta
+etiqueta.setStyleSheet('font-size: 30px; font-weight: bold;')
 etiqueta.move(50, 50) # Mueve la etiqueta a la posición (50, 50)
+# etiqueta.setAlignment(Qt.AlignCenter) # Centra el texto de la etiqueta
 etiqueta.show() # Muestra la etiqueta
 ```
 
