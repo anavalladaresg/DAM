@@ -40,6 +40,8 @@ y = "Hello, World!"
 
 #### 3.1. If
 
+Ejecuta un bloque de código si una condición es verdadera.
+
 ```python
 a = 33
 b = 200
@@ -48,6 +50,8 @@ if b > a:
 ```
 
 #### 3.2. Elif
+
+Ejecuta un bloque de código si la primera condición es verdadera, y si no lo es, prueba la siguiente condición.
 
 ```python
 a = 33
@@ -59,6 +63,8 @@ elif a == b:
 ```
 
 #### 3.3. Else
+
+Ejecuta un bloque de código si ninguna de las condiciones anteriores es verdadera.
 
 ```python
 a = 200
@@ -137,6 +143,8 @@ QT es una biblioteca multiplataforma para el desarrollo de interfaces gráficas 
 
 #### 8.1. QWidget
 
+Crea una ventana con un título.
+
 ```python
 app = QApplication(sys.argv) # Crea una instancia de la aplicación
 
@@ -149,6 +157,8 @@ sys.exit(app.exec_()) # Cierra la aplicación
 
 #### 8.2. QLabel
 
+Crea una etiqueta con un texto.
+
 ```python
 etiqueta = QLabel('Hello World!', ventana) # Crea una etiqueta
 etiqueta.move(50, 50) # Mueve la etiqueta a la posición (50, 50)
@@ -156,6 +166,8 @@ etiqueta.show() # Muestra la etiqueta
 ```
 
 #### 8.3. QPushButton
+
+Crea un botón con un texto.
 
 ```python
 boton = QPushButton('Click me!', ventana) # Crea un botón
@@ -165,6 +177,8 @@ boton.show() # Muestra el botón
 
 #### 8.4. QLineEdit
 
+Crea una caja de texto.
+
 ```python
 caja = QLineEdit(ventana) # Crea una caja de texto
 caja.move(50, 150) # Mueve la caja de texto a la posición (50, 150)
@@ -172,6 +186,8 @@ caja.show() # Muestra la caja de texto
 ```
 
 #### 8.5. QCheckBox
+
+Crea una casilla de verificación.
 
 ```python
 casilla = QCheckBox('Check me!', ventana) # Crea una casilla de verificación
@@ -181,6 +197,8 @@ casilla.show() # Muestra la casilla de verificación
 
 #### 8.6. QRadioButton
 
+Crea un botón de radio.
+
 ```python
 radio = QRadioButton('Select me!', ventana) # Crea un botón de radio
 radio.move(50, 250) # Mueve el botón de radio a la posición (50, 250)
@@ -188,6 +206,8 @@ radio.show() # Muestra el botón de radio
 ```
 
 #### 8.7. QComboBox
+
+Crea un cuadro combinado.
 
 ```python
 combo = QComboBox(ventana) # Crea un cuadro combinado
@@ -199,6 +219,8 @@ combo.show() # Muestra el cuadro combinado
 
 #### 8.8. QSlider
 
+Crea un deslizador.
+
 ```python
 deslizador = QSlider(Qt.Horizontal, ventana) # Crea un deslizador horizontal
 deslizador.move(50, 350) # Mueve el deslizador a la posición (50, 350)
@@ -207,7 +229,7 @@ deslizador.show() # Muestra el deslizador
 
 #### 8.9. QProgressBar
 
-[//]: # (Este es un comentario en Markdown)
+Crea una barra de progreso.
 
 ```python
 barra = QProgressBar(ventana) # Crea una barra de progreso
@@ -217,6 +239,8 @@ barra.show() # Muestra la barra de progreso
 
 #### 8.10. QSpinBox
 
+Crea una caja numérica.
+
 ```python
 caja_numerica = QSpinBox(ventana) # Crea una caja numérica
 caja_numerica.move(50, 450) # Mueve la caja numérica a la posición (50, 450)
@@ -224,6 +248,8 @@ caja_numerica.show() # Muestra la caja numérica
 ```
 
 #### 8.11. QDateEdit
+
+Crea un editor de fechas.
 
 ```python
 fecha = QDateEdit(ventana) # Crea un editor de fechas
@@ -233,6 +259,8 @@ fecha.show() # Muestra el editor de fechas
 
 #### 8.12. QTimeEdit
 
+Crea un editor de horas.
+
 ```python
 hora = QTimeEdit(ventana) # Crea un editor de horas
 hora.move(50, 550) # Mueve el editor de horas a la posición (50, 550)
@@ -240,6 +268,8 @@ hora.show() # Muestra el editor de horas
 ```
 
 #### 8.13. QDateTimeEdit
+
+Crea un editor de fechas y horas.
 
 ```python
 fecha_hora = QDateTimeEdit(ventana) # Crea un editor de fechas y horas
@@ -249,6 +279,8 @@ fecha_hora.show() # Muestra el editor de fechas y horas
 
 #### 8.14. QPlainTextEdit
 
+Crea un editor de texto plano.
+
 ```python
 texto = QPlainTextEdit(ventana) # Crea un editor de texto plano
 texto.move(50, 650) # Mueve el editor de texto plano a la posición (50, 650)
@@ -257,6 +289,8 @@ texto.show() # Muestra el editor de texto plano
 
 #### 8.15. QTextEdit (se pueden añadir imágenes, hipervínculos, etc.)
 
+Crea un editor de texto enriquecido.
+
 ```python
 texto_rico = QTextEdit(ventana) # Crea un editor de texto enriquecido
 texto_rico.move(50, 700) # Mueve el editor de texto enriquecido a la posición (50, 700)
@@ -264,6 +298,8 @@ texto_rico.show() # Muestra el editor de texto enriquecido
 ```
 
 #### 8.16. QTableWidget & QTableWidgetItem
+
+Crea una tabla con elementos.
 
 ```python
 tabla = QTableWidget(ventana) # Crea una tabla
@@ -274,9 +310,10 @@ tabla.setItem(0, 0, QTableWidgetItem('Hello')) # Añade un elemento a la tabla
 tabla.setItem(0, 1, QTableWidgetItem('World')) # Añade otro elemento a la tabla
 tabla.show() # Muestra la tabla
 ```
-[//]: # (↓ ESTO NO SÉ COMO VA ↓) 
 
 #### 8.17. QItemDataRole
+
+Crea un elemento de la tabla con un tooltip (información adicional) y un icono.
 
 ```python
 item = QTableWidgetItem('Hello') # Crea un elemento de la tabla
@@ -285,6 +322,8 @@ item.setData(Qt.DecorationRole, QIcon('icon.png')) # Establece un icono para el 
 ```
 
 #### 8.18. QAbstractListModel
+
+Crea un modelo de lista.
 
 ```python
 class MyModel(QAbstractListModel):
@@ -300,13 +339,13 @@ class MyModel(QAbstractListModel):
       return self._data[index.row()] # Devuelve el elemento de la lista en la posición index.row() [posición de la fila]
 ```
 
-[//]: # (↑ ESTO NO SÉ COMO VA ↑) 
-
 ---
 
 ### 9. Funcionalidades de botones <a name="id14"></a>
 
 #### 9.1. Click
+
+Muestra un mensaje en la consola cuando se hace clic en el botón.
 
 ```python
 def on_click():
@@ -318,6 +357,8 @@ boton.clicked.connect(on_click)
 
 #### 9.2. Cambiar texto
 
+Cambiar el texto del botón cuando se hace clic en él.
+
 ```python
 def on_click():
   boton.setText('Clicked!')
@@ -326,6 +367,8 @@ boton.clicked.connect(on_click)
 ```
 
 #### 9.3. Cambiar color
+
+Cambiar el color de fondo del botón cuando se hace clic en él.
 
 ```python
 def on_click():
@@ -336,6 +379,8 @@ boton.clicked.connect(on_click)
 
 #### 9.4. Cambiar tamaño
 
+Cambiar el tamaño del botón cuando se hace clic en él.
+
 ```python
 def on_click():
   boton.resize(100, 100)
@@ -344,6 +389,8 @@ boton.clicked.connect(on_click)
 ```
 
 #### 9.5. Cambiar posición
+
+Cambiar la posición del botón cuando se hace clic en él.
 
 ```python
 def on_click():
@@ -354,6 +401,8 @@ boton.clicked.connect(on_click)
 
 #### 9.6. Ocultar
 
+Oculta el botón cuando se hace clic en él.
+
 ```python
 def on_click():
   boton.hide()
@@ -362,6 +411,8 @@ boton.clicked.connect(on_click)
 ```
 
 #### 9.7. Mostrar
+
+Muestra el botón cuando se hace clic en él.
 
 ```python
 def on_click():
@@ -373,6 +424,8 @@ boton.clicked.connect(on_click)
 
 #### 9.8. Deshabilitar
 
+Deshabilita el botón cuando se hace clic en él.
+
 ```python
 def on_click():
   boton.setEnabled(False)
@@ -381,6 +434,8 @@ boton.clicked.connect(on_click)
 ```
 
 #### 9.9. Habilitar
+
+Habilita el botón cuando se hace clic en él.
 
 ```python
 def on_click():
@@ -391,10 +446,11 @@ boton.clicked.connect(on_click)
 
 #### 9.10. Cerrar ventana
 
+Cierra la ventana cuando se hace clic en el botón.
+
 ```python
 def on_click():
   ventana.close()
 
 boton.clicked.connect(on_click)
 ```
-
