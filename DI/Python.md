@@ -347,6 +347,7 @@ Crea un editor de texto plano.
 ```python
 texto = QPlainTextEdit(ventana) # Crea un editor de texto plano
 texto.move(50, 650) # Mueve el editor de texto plano a la posición (50, 650)
+# texto.setEchoMode(QLineEdit.Password) # Oculta el texto de la contraseña (se muestra como asteriscos)
 texto.show() # Muestra el editor de texto plano
 ```
 
@@ -411,6 +412,20 @@ login_frame = QGroupBox("Login") # Crea un grupo de elementos
 login_frame.setStyleSheet('font-size: 10px; font-weight: bold;') # Establece el estilo del grupo de elementos
 login_layout = QVBoxLayout() # Crea un diseño vertical
 login_frame.setLayout(login_layout) # Establece el diseño del grupo de elementos
+```
+
+#### 8.20. QGridLayout
+
+Crea un diseño de cuadrícula.
+
+```python
+layout = QGridLayout() # Crea un diseño de cuadrícula
+
+layout.addWidget(<item1>, 0, 0) # Añade un botón en la posición (0, 0)
+layout.addWidget(<item2>, 0, 1) # Añade otro botón en la posición (0, 1)
+layout.addWidget(<item3>, 1, 0) # Añade otro botón en la posición (1, 0)
+
+ventana.setLayout(layout) # Establece el diseño de la ventana
 ```
 
 ---
