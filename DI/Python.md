@@ -33,6 +33,28 @@ x = 5
 y = "Hello, World!"
 ```
 
+#### 2.1. Tuplas
+
+Una tupla es una colección ordenada e inmutable de elementos.
+
+```python
+tupla = ("manzana", "plátano", "cereza")
+```
+
+Metodos de las tuplas:
+
+```python
+tupla.count("manzana") # Devuelve el número de veces que aparece "manzana" en la tupla
+tupla.index("plátano") # Devuelve la posición de "plátano" en la tupla
+tupla.append("naranja") # Añade "naranja" al final de la tupla
+tupla.remove("cereza") # Elimina "cereza" de la tupla
+tupla.pop() # Elimina el último elemento de la tupla
+tupla.clear() # Elimina todos los elementos de la tupla
+tupla = tuple(("manzana", "plátano", "cereza")) # Crea una tupla
+tupla = tuple.sorted(tupla) # Ordena la tupla
+```
+
+
 ---
 
 ### 3. Estructuras de control <a name="id5"></a>
@@ -431,6 +453,14 @@ ventana.setLayout(layout) # Establece el diseño de la ventana
 ---
 
 ### 9. Funcionalidades de botones <a name="id14"></a>
+
+```python
+ventana = QWidget() # Crea una ventana
+ventana.setWindowTitle('Hello World!') # Establece el título de la ventana
+boton = QPushButton('Click me!', ventana) # Crea un botón, ventana es la ventana en la que se mostrará el botón
+ventana.show() # Muestra la ventana
+sys.exit(app.exec_()) # Cierra la aplicación
+```
 
 #### 9.1. Click
 
